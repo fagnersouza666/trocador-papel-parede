@@ -1,23 +1,25 @@
 
 # Trocador de Papel de Parede
 
-Este script em Python permite que você selecione uma imagem aleatória de um diretório e a defina como papel de parede no ambiente GNOME do Linux. Ele suporta tanto modos claro quanto escuro, ajustando automaticamente o papel de parede para ambos.
+Este script em Python permite que você selecione uma imagem aleatória de um diretório e a defina como papel de parede no ambiente GNOME do Linux ou no Windows. Ele suporta tanto modos claro quanto escuro no Linux e também pode ser configurado para ser executado automaticamente em ambos os sistemas operacionais.
 
 ## Características
 
 - Seleção aleatória de imagens de um diretório especificado.
+- Suporte para aplicar papel de parede em ambientes Linux (GNOME) e Windows.
 - Suporte a rotação automática de logs com o uso de `RotatingFileHandler`.
 - Configuração fácil através de um arquivo `config.ini`.
 - Logs gravados em um arquivo para auditoria e depuração.
-- Configurável para ser executado periodicamente através do cron.
+- Configurável para ser executado periodicamente através do cron (Linux) ou Task Scheduler (Windows).
 
 ## Configuração
 
 ### 1. Requisitos
 
 - Python 3.x instalado.
-- Ambiente GNOME no Linux.
-- Acesso ao terminal para configurar o cron.
+- **Para Linux**: Ambiente GNOME.
+- **Para Windows**: Sistema operacional Windows.
+- Acesso ao terminal para configurar o cron (Linux) ou Task Scheduler (Windows).
 
 ### 2. Instalação
 
@@ -48,27 +50,27 @@ Para trocar o papel de parede manualmente, execute o script `main.py`:
 python3 main.py
 ```
 
-### 4. Configuração de Execução Automática no Linux (Cron)
+### 4. Configuração de Execução Automática
 
-Para trocar o papel de parede automaticamente em intervalos regulares, você pode usar o `cron` para agendar a execução do script.
+#### Linux (Cron)
+Para trocar o papel de parede automaticamente em intervalos regulares no Linux, use o `cron` para agendar a execução do script.
 
 1. **Abra o crontab para edição**:
-
     ```bash
     crontab -e
     ```
-
 2. **Adicione uma linha para agendar o script**. Por exemplo, para executar a cada hora:
-
     ```bash
     0 * * * * /caminho/para/o/python3 /caminho/para/o/script/main.py
     ```
+3. **Salve e saia do editor**.
 
-    - **`0 * * * *`**: Executa o script na primeira minuto de cada hora.
-    - **`/caminho/para/o/python3`**: Especifique o caminho completo para o Python 3.
-    - **`/caminho/para/o/script/main.py`**: Especifique o caminho completo para o arquivo `main.py`.
+#### Windows (Task Scheduler)
+Para trocar o papel de parede automaticamente em intervalos regulares no Windows, use o Task Scheduler.
 
-3. **Salve e saia do editor**. O cron agora executará o script nos intervalos definidos.
+1. **Abra o Task Scheduler e crie uma nova tarefa**.
+2. **Configure a tarefa para executar o script `main.py` no intervalo desejado**.
+3. **Salve a tarefa e ela será executada conforme agendado**.
 
 ### 5. Logs
 
