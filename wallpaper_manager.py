@@ -1,4 +1,3 @@
-# wallpaper_manager.py
 import subprocess
 import logging
 import platform
