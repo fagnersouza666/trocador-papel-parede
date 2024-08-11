@@ -1,6 +1,7 @@
 import os
 import random
 from typing import Optional
+import logging
 
 
 class ImageSelector:
@@ -14,6 +15,7 @@ class ImageSelector:
 
     def select_random_image(self) -> Optional[str]:
         if not os.path.isdir(self.directory):
+            logging.error(f"Diretório não encontrado: {self.directory}")
             return None
 
         images = [
@@ -24,6 +26,11 @@ class ImageSelector:
         ]
 
         if not images:
+            logging.warning(
+                f"Nenhuma imagem válida encontrada no diretório: {self.directory}"
+            )
             return None
 
-        return random.choice(images)
+        selected_image = random.choice(images)
+        logging.info(f"Imagem selecionada: {selected_image}")
+        return selected_image

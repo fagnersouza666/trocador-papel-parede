@@ -1,4 +1,5 @@
 import subprocess
+import logging
 
 
 class WallpaperManager:
@@ -17,12 +18,20 @@ class WallpaperManager:
         result = subprocess.run(command, capture_output=True, text=True)
 
         if result.returncode != 0:
-            print(f"Erro ao tentar trocar o papel de parede para o modo {mode}.")
-            print("Erro:", result.stderr)
+            logging.error(
+                f"Erro ao tentar trocar o papel de parede para o modo {mode}."
+            )
+            logging.error(f"Erro: {result.stderr}")
+            return False
 
-        return result.returncode == 0
+        logging.info(f"Papel de parede definido para o modo {mode} com sucesso.")
+        return True
 
     def apply_wallpaper(self) -> bool:
         success_light = self._set_wallpaper("claro")
         success_dark = self._set_wallpaper("escuro")
+        if success_light and success_dark:
+            logging.info("Papel de parede trocado com sucesso para ambos os modos.")
+        else:
+            logging.error("Falha ao trocar o papel de parede.")
         return success_light and success_dark
