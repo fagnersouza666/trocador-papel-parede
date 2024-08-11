@@ -2,6 +2,7 @@ from config_loader import ConfigLoader
 from image_selector import ImageSelector
 from wallpaper_manager import WallpaperManager
 from logging_config import LoggerConfig
+import platform
 
 
 def main():
@@ -11,6 +12,7 @@ def main():
     )
     logger = logger_config.get_logger()
 
+    # Carrega as configurações do arquivo config.ini
     config_loader = ConfigLoader()
     wallpaper_dir = config_loader.get_wallpaper_dir()
 
@@ -18,6 +20,7 @@ def main():
         logger.error("Diretório do papel de parede não encontrado na configuração.")
         return
 
+    # Seleciona uma imagem aleatória do diretório configurado
     image_selector = ImageSelector(wallpaper_dir)
     selected_image = image_selector.select_random_image()
 
@@ -25,6 +28,7 @@ def main():
         logger.error("Nenhuma imagem encontrada.")
         return
 
+    # Aplica o papel de parede de acordo com o sistema operacional
     wallpaper_manager = WallpaperManager(selected_image)
     success = wallpaper_manager.apply_wallpaper()
 
