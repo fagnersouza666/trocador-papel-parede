@@ -20,17 +20,20 @@ def main():
         logger.error("Diretório do papel de parede não encontrado na configuração.")
         return
 
-    # Seleciona uma imagem aleatória do diretório configurado
-    image_selector = ImageSelector(wallpaper_dir)
+    # Gerencia o papel de parede atual
+    wallpaper_manager = WallpaperManager()
+    current_wallpaper = wallpaper_manager.get_current_wallpaper()
+
+    # Seleciona uma imagem aleatória diferente da atual
+    image_selector = ImageSelector(wallpaper_dir, current_wallpaper)
     selected_image = image_selector.select_random_image()
 
     if not selected_image:
         logger.error("Nenhuma imagem encontrada.")
         return
 
-    # Aplica o papel de parede de acordo com o sistema operacional
-    wallpaper_manager = WallpaperManager(selected_image)
-    success = wallpaper_manager.apply_wallpaper()
+    # Aplica o novo papel de parede
+    success = wallpaper_manager.apply_wallpaper(selected_image)
 
     if success:
         logger.info("Processo concluído com sucesso.")

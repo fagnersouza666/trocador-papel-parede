@@ -5,8 +5,9 @@ import logging
 
 
 class ImageSelector:
-    def __init__(self, directory: str):
+    def __init__(self, directory: str, current_image: Optional[str] = None):
         self.directory = directory
+        self.current_image = current_image
 
     def _is_valid_image(self, file_name: str) -> bool:
         valid_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".gif"}
@@ -23,6 +24,7 @@ class ImageSelector:
             for f in os.listdir(self.directory)
             if os.path.isfile(os.path.join(self.directory, f))
             and self._is_valid_image(f)
+            and os.path.join(self.directory, f) != self.current_image
         ]
 
         if not images:
