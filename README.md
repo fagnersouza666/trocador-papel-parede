@@ -1,5 +1,5 @@
 
-# Wallpaper Changer Script
+# Trocador de Papel de Parede
 
 Este script em Python permite que você selecione uma imagem aleatória de um diretório e a defina como papel de parede no ambiente GNOME do Linux. Ele suporta tanto modos claro quanto escuro, ajustando automaticamente o papel de parede para ambos.
 
