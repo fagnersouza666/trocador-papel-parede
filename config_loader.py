@@ -1,10 +1,14 @@
 import configparser
+import os
 from typing import Dict
 
 
 class ConfigLoader:
     def __init__(self, config_file: str = "config.ini"):
-        self.config_file = config_file
+        # Obtém o diretório do arquivo atual (config_loader.py)
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        # Constrói o caminho completo para o arquivo config.ini
+        self.config_file = os.path.join(script_dir, config_file)
         self.config = (
             self._load_config()
         )  # Carrega as configurações do arquivo assim que a instância é criada.

@@ -6,15 +6,15 @@ import platform
 
 
 def main():
-    # Cria uma instância do LoggerConfig e configura o logger.
-    logger_config = LoggerConfig(
-        log_file="wallpaper_changer.log", max_bytes=1048576, backup_count=3
-    )
-    logger = logger_config.get_logger()
-
     # Carrega as configurações do arquivo config.ini
     config_loader = ConfigLoader()
     wallpaper_dir = config_loader.get_wallpaper_dir()
+
+    # Cria uma instância do LoggerConfig e configura o logger.
+    logger_config = LoggerConfig(
+        log_file=f"{wallpaper_dir}wallpaper_changer.log", max_bytes=1048576
+    )
+    logger = logger_config.get_logger()
 
     if not wallpaper_dir:
         logger.error("Diretório do papel de parede não encontrado na configuração.")
